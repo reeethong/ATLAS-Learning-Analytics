@@ -50,7 +50,6 @@ print(num_STEM_Schools, num_Non_STEM_Schools)
 
 STEM_data = df.loc[df['School'].isin(STEM_Schools)]
 print(len(STEM_data))
-print("Split")
 non_STEM_data = df.loc[df['School'].isin(non_STEM_Schools)]
 # print(len(non_STEM_data))
 # print(non_STEM_data["ID"])
@@ -71,7 +70,60 @@ def quantitative_filter(df,column_name):
     res.append(len(df.loc[df[column_name]=="Strongly disagree"]))
     return res
 
+def quantitative_filter2(df,column_name):
+    # returns [strongly agree, agree, Neutral, disagree, Strongly disagree]
+    res = []
+    res.append(len(df.loc[df[column_name]=="Strongly Agree"]))
+    res.append(len(df.loc[df[column_name]=="Agree"]))
+    res.append(len(df.loc[df[column_name]=="Neutral"]))
+    res.append(len(df.loc[df[column_name]=="Disagree"]))
+    res.append(len(df.loc[df[column_name]=="Strongly Disagree"]))
+    return res
+print("\n\n")
+print("Section one:")
+print("\nSTEM_data")
+print(quantitative_filter(STEM_data,'1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2'))
+print(quantitative_filter(STEM_data,'2.\xa0\xa0\xa0\xa0 It is important to keep track and analyse my own learning data.2'))
+print(quantitative_filter(STEM_data,'3.\xa0\xa0\xa0\xa0 I will adjust my study habits or learning strategies based on insights from learning analytics.2'))
+
+print("\nnon_STEM_data")
 print(quantitative_filter(non_STEM_data,'1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2'))
 print(quantitative_filter(non_STEM_data,'2.\xa0\xa0\xa0\xa0 It is important to keep track and analyse my own learning data.2'))
 print(quantitative_filter(non_STEM_data,'3.\xa0\xa0\xa0\xa0 I will adjust my study habits or learning strategies based on insights from learning analytics.2'))
-# print(quantitative_filter(non_STEM_data,))
+
+print("\n\n")
+print("Section two:")
+print("\nSTEM_data")
+print(quantitative_filter2(STEM_data,"1.\xa0\xa0\xa0\xa0 I know that the university has put in place a student data governance policy in line with PDPC.2"))
+print(quantitative_filter2(STEM_data,"2.\xa0 \xa0 \xa0The university should ask for my explicit consent for learning analytics projects if it involves any identifiable data about me (e.g., name, ethnicity, age, and gender).2"))
+print(quantitative_filter2(STEM_data,"3.\xa0\xa0\xa0\xa0 I am comfortable with the idea of NTU collecting data on my learning behaviours and performances to improve teaching and learning.2"))
+print(quantitative_filter2(STEM_data,"4.\xa0\xa0\xa0\xa0 It is important to me that I can opt out of the collection of my learning data for my professors and tutors. 2"))
+print(quantitative_filter2(STEM_data,"5.\xa0\xa0\xa0\xa0 It is important to me that I can opt out of the collection of my learning data to be used by myself.2"))
+
+print("\nnon_STEM_data")
+print(quantitative_filter2(non_STEM_data,"1.\xa0\xa0\xa0\xa0 I know that the university has put in place a student data governance policy in line with PDPC.2"))
+print(quantitative_filter2(non_STEM_data,"2.\xa0 \xa0 \xa0The university should ask for my explicit consent for learning analytics projects if it involves any identifiable data about me (e.g., name, ethnicity, age, and gender).2"))
+print(quantitative_filter2(non_STEM_data,"3.\xa0\xa0\xa0\xa0 I am comfortable with the idea of NTU collecting data on my learning behaviours and performances to improve teaching and learning.2"))
+print(quantitative_filter2(non_STEM_data,"4.\xa0\xa0\xa0\xa0 It is important to me that I can opt out of the collection of my learning data for my professors and tutors. 2"))
+print(quantitative_filter2(non_STEM_data,"5.\xa0\xa0\xa0\xa0 It is important to me that I can opt out of the collection of my learning data to be used by myself.2"))
+
+print("\n\n")
+print("Section three:")
+print("\nSTEM_data")
+print(quantitative_filter2(STEM_data,"1.\xa0\xa0\xa0\xa0 The university should regularly update me about my learning progress based on the analysis of my educational data.3"))
+print(quantitative_filter2(STEM_data,"2.\xa0 \xa0The learning analytics service should show how my learning progress compares to the course learning outcomes.3"))
+print(quantitative_filter2(STEM_data,"3.\xa0\xa0\xa0\xa0 I expect the teaching staff to act (i.e. support me) if the analytics show that I am at-risk of failing, underperforming or needs improvement in my learning.3"))
+print(quantitative_filter2(STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU. a. Early AleRT for Learning Intervention (EARLI): A predictive AI project to detect and support at-risk students..."))
+print(quantitative_filter2(STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU. b. Course Analytics Dashboard for Students (CADS): A personalised learning analytics project that provides facul..."))
+print(quantitative_filter2(STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU.\xa0c. NTU AI Learning Assistant (NALA): Customised Gen-AI tutoring chatbot to guide students based on faculty curat..."))
+print(quantitative_filter2(STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU.\xa0d. Skills and Course Advising for Learning Excellence (SCALE): A course and co-curricular recommendation AI proj..."))
+
+print("\nnon_STEM_data")
+print(quantitative_filter2(non_STEM_data,"1.\xa0\xa0\xa0\xa0 The university should regularly update me about my learning progress based on the analysis of my educational data.3"))
+print(quantitative_filter2(non_STEM_data,"2.\xa0 \xa0The learning analytics service should show how my learning progress compares to the course learning outcomes.3"))
+print(quantitative_filter2(non_STEM_data,"3.\xa0\xa0\xa0\xa0 I expect the teaching staff to act (i.e. support me) if the analytics show that I am at-risk of failing, underperforming or needs improvement in my learning.3"))
+print(quantitative_filter2(non_STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU. a. Early AleRT for Learning Intervention (EARLI): A predictive AI project to detect and support at-risk students..."))
+print(quantitative_filter2(non_STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU. b. Course Analytics Dashboard for Students (CADS): A personalised learning analytics project that provides facul..."))
+print(quantitative_filter2(non_STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU.\xa0c. NTU AI Learning Assistant (NALA): Customised Gen-AI tutoring chatbot to guide students based on faculty curat..."))
+print(quantitative_filter2(non_STEM_data,"4.\xa0\xa0\xa0\xa0 I feel that the following project could potentially benefit students in NTU.\xa0d. Skills and Course Advising for Learning Excellence (SCALE): A course and co-curricular recommendation AI proj..."))
+
