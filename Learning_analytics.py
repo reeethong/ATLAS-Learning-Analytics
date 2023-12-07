@@ -40,4 +40,22 @@ df = df[["ID","Year of Study", "School", "I have read and understood the instruc
 
 df.drop(df[df['I have read and understood the instructions.'] != 'Yes'].index, inplace=True)
 
+STEM_Schools = [
+"CCEB",	
+"CEE",
+"COE",
+"EEE",
+"MSE",
+"MAE",
+"REP",
+"SBS",
+"SCSE",
+"SPMS",
+"SSM"	
+]
+num_STEM_Schools = 8 + 10 + 5 + 21 + 4 + 12 + 4 + 11 + 22 + 13 + 2 
+#Science,tech,engineering,maths
+non_STEM_Schools = ["ADM","ASE", "SOH", "WKWSCI", "NBS", "NIE", "LKCSoM", "SSS"]
+num_Non_STEM_Schools = 5 + 1 + 15 + 1 + 22 + 3 + 2 + 6
 # print(df["ID"].head(20))
+print(num_STEM_Schools, num_Non_STEM_Schools)
