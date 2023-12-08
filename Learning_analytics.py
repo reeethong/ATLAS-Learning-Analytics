@@ -232,7 +232,7 @@ def create_df(datalist,sectionname,sizes):
 # }
 # print(combined_data)
 # combined_df = pd.DataFrame(combined_data)
-combined_df = create_df([s3_STEM,s3_non_STEM],["STEM_S3","non_STEM_S3"],[112,56])
+combined_df = create_df([s3_STEM,s3_non_STEM],["STEM_S3","non_STEM_S3"],[112,54])
 print(combined_df)
 # plt.plot(Combined_df)
 plot1 = combined_df.plot( 
