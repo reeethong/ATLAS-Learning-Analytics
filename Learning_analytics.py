@@ -12,6 +12,7 @@ Dependencies:
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 url = "D:\\Nanyang Technological University\\NTU Imperial Student-Led Project on Learning Analytics - General\\NTU Student Analytics Survey.xlsx"
 df = pd.read_excel(url)
 columnlist = list(df.columns)
@@ -82,7 +83,7 @@ def quantitative_filter2(df,column_name):
     res.append(len(df.loc[df[column_name]=="Disagree"]))
     res.append(len(df.loc[df[column_name]=="Strongly Disagree"]))
     return res
-def section_One_quantitative(data):
+def section_One_Quantitative(data):
     res_dict = {}
     res = quantitative_filter(data,'1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2')
     print(res)
@@ -153,27 +154,36 @@ def section_Three_Quantitative(data):
     print([res[0]+res[1],res[2],res[3]+res[4]])
     res_dict["q7"]=[res[0]+res[1],res[2],res[3]+res[4]]
     return res_dict
+'''No categorisation'''
+# s1 = section_One_Quantitative(df)
+# s2 = section_Two_Quantitative(df)
+# s3 = section_Three_Quantitative(df)
 
-print("\n\n")
-print("Section one:")
-print("\nSTEM_data")
-s1_STEM = section_One_quantitative(STEM_data)
-print("\nnon_STEM_data")
-s1_non_STEM = section_One_quantitative(non_STEM_data)
-print("\n\n")
-print("Section two:")
-print("\nSTEM_data")
-s2_STEM = section_Two_Quantitative(STEM_data)
-print("\nnon_STEM_data")
-s2_non_STEM = section_Two_Quantitative(non_STEM_data)
-print("\n\n")
-print("Section three:")
-print("\nSTEM_data")
-s3_STEM = section_Three_Quantitative(STEM_data)
-print("\nnon_STEM_data")
-s3_non_STEM = section_Three_Quantitative(non_STEM_data)
+'''Categorisation by STEM/non_STEM
+# print("\n\n")
+# print("Section one:")
+# print("\nSTEM_data")
+# s1_STEM = section_One_Quantitative(STEM_data)
+# print("\nnon_STEM_data")
+# s1_non_STEM = section_One_Quantitative(non_STEM_data)
+# print("\n\n")
+# print("Section two:")
+# print("\nSTEM_data")
+# s2_STEM = section_Two_Quantitative(STEM_data)
+# print("\nnon_STEM_data")
+# s2_non_STEM = section_Two_Quantitative(non_STEM_data)
+# print("\n\n")
+# print("Section three:")
+# print("\nSTEM_data")
+# s3_STEM = section_Three_Quantitative(STEM_data)
+# print("\nnon_STEM_data")
+# s3_non_STEM = section_Three_Quantitative(non_STEM_data)
+'''
+
+'''Categorisation by year
 
 # Years_dict = {"Year 1": 65, "Year 2":53, "Year 3":21, "Year 4":27, "Year 5 and above":2}
+
 y1_data = df.loc[df["Year of Study"]=="Year 1"]
 y2_data = df.loc[df["Year of Study"]=="Year 2"]
 y3_data = df.loc[df["Year of Study"]=="Year 3"]
@@ -182,14 +192,42 @@ y4_data = df.loc[df["Year of Study"]=="Year 4"]
 print("\n\n")
 print("Section one:")
 print("\ny1_data")
-section_One_quantitative(y1_data)
+s1_y1=section_One_Quantitative(y1_data)
 print("\ny2_data")
-section_One_quantitative(y2_data)
+s1_y2=section_One_Quantitative(y2_data)
 print("\ny3_data")
-section_One_quantitative(y3_data)
+s1_y3=section_One_Quantitative(y3_data)
 print("\ny4_data")
-section_One_quantitative(y4_data)
+s1_y4=section_One_Quantitative(y4_data)
 
+print("\n\n")
+print("Section two:")
+print("\ny1_data")
+s2_y1=section_Two_Quantitative(y1_data)
+print("\ny2_data")
+s2_y2=section_Two_Quantitative(y2_data)
+print("\ny3_data")
+s2_y3=section_Two_Quantitative(y3_data)
+print("\ny4_data")
+s2_y4=section_Two_Quantitative(y4_data)
+
+print("\n\n")
+print("Section three:")
+print("\ny1_data")
+s3_y1=section_Three_Quantitative(y1_data)
+print("\ny2_data")
+s3_y2=section_Three_Quantitative(y2_data)
+print("\ny3_data")
+s3_y3=section_Three_Quantitative(y3_data)
+print("\ny4_data")
+s3_y4=section_Three_Quantitative(y4_data)
+'''
+
+'''Categorise by section 1 qn 1'''
+s1q1A = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly agree","Agree"])]
+s1q1A_s1 = section_One_Quantitative(s1q1A)
+s1q1D = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly disagree","Disagree"])]
+s1q1D_s1 = section_One_Quantitative(s1q1D)
 '''Hypo 1 does stem/ non-STEM produce differnet answers for some questions'''
 # print("\nSection 1")
 # for i in s1_STEM:
@@ -224,23 +262,29 @@ def create_df(datalist,sectionname,sizes):
     combined_df = pd.DataFrame(combined_data)
     return combined_df
 
-# combined_data = {
-#     "question": ['STEM_S1_Q3','non_STEM_S1_Q3', 'STEM_S1_Q2','non_STEM_S1_Q2','STEM_S1_Q1','non_STEM_S1_Q1'],
-#     "Agree": [s1_STEM["q3"][0]/112,s1_non_STEM["q3"][0]/56,s1_STEM["q2"][0]/112,s1_non_STEM["q2"][0]/56,s1_STEM["q1"][0]/112,s1_non_STEM["q1"][0]/56],
-#     "Neutral": [s1_STEM["q3"][1]/112,s1_non_STEM["q3"][1]/56,s1_STEM["q2"][1]/112,s1_non_STEM["q2"][1]/56,s1_STEM["q1"][1]/112,s1_non_STEM["q1"][1]/56],
-#     "Disagree": [s1_STEM["q3"][2]/112,s1_non_STEM["q3"][2]/56,s1_STEM["q2"][2]/112,s1_non_STEM["q2"][2]/56,s1_STEM["q1"][2]/112,s1_non_STEM["q1"][2]/56]
-# }
-# print(combined_data)
-# combined_df = pd.DataFrame(combined_data)
-combined_df = create_df([s3_STEM,s3_non_STEM],["STEM_S3","non_STEM_S3"],[112,54])
+
+# combined_df = create_df([s3_STEM,s3_non_STEM],["STEM_S3","non_STEM_S3"],[112,54])
+# combined_df = create_df([s3_y1,s3_y2,s3_y3,s3_y4],["y1_S3","y2_S3","y3_S3","y4_S3"],[65,53,21,27])
+# dropped = [i for i in range(16,28,1)]
+# combined_df = combined_df.drop(dropped)
+# combined_df = create_df([s3],["S3"],[166])
+combined_df = create_df([s1q1D_s1],["S1"],[77]) #77 29 62 / 127 26 15 / 118 31 19
 print(combined_df)
-# plt.plot(Combined_df)
 plot1 = combined_df.plot( 
     x = 'question', 
     kind = 'barh', 
     stacked = True, 
-    title = 'Stacked Bar Graph', 
+    title = 'Section 1 with categorisation by s1q1', 
     mark_right = True)
+plt.legend (loc='upper left')
+# df_total = combined_df
+# df_rel = df[df.columns[1:]].div(df_total, 0)*100
+# for n in df_rel: 
+#     for i, (cs, ab, pc) in enumerate(zip(df.iloc[:, 1:].cumsum(1)[n],  
+#                                          df[n], df_rel[n])): 
+# plt.text(cs - ab / 2, i, str(np.round(pc, 1)) + '%',  
+#                  va = 'center', ha = 'center')
+# plt.text(1-combined_df["Agree"][1]/100, 0.5, str(combined_df["Agree"][0]) + '%',  va = 'center', ha = 'center')
 plt.show()
 
 # print([s1_STEM["q2"][0], s1_STEM["q2"][1], s1_STEM["q2"][2], s1_STEM["q2"][0]/112, s1_STEM["q2"][2]/112])
