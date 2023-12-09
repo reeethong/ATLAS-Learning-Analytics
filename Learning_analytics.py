@@ -159,26 +159,26 @@ def section_Three_Quantitative(data):
 # s2 = section_Two_Quantitative(df)
 # s3 = section_Three_Quantitative(df)
 
-'''Categorisation by STEM/non_STEM
-# print("\n\n")
-# print("Section one:")
-# print("\nSTEM_data")
-# s1_STEM = section_One_Quantitative(STEM_data)
-# print("\nnon_STEM_data")
-# s1_non_STEM = section_One_Quantitative(non_STEM_data)
-# print("\n\n")
-# print("Section two:")
-# print("\nSTEM_data")
-# s2_STEM = section_Two_Quantitative(STEM_data)
-# print("\nnon_STEM_data")
-# s2_non_STEM = section_Two_Quantitative(non_STEM_data)
-# print("\n\n")
-# print("Section three:")
-# print("\nSTEM_data")
-# s3_STEM = section_Three_Quantitative(STEM_data)
-# print("\nnon_STEM_data")
-# s3_non_STEM = section_Three_Quantitative(non_STEM_data)
-'''
+# Categorisation by STEM/non_STEM
+print("\n\n")
+print("Section one:")
+print("\nSTEM_data")
+s1_STEM = section_One_Quantitative(STEM_data)
+print("\nnon_STEM_data")
+s1_non_STEM = section_One_Quantitative(non_STEM_data)
+print("\n\n")
+print("Section two:")
+print("\nSTEM_data")
+s2_STEM = section_Two_Quantitative(STEM_data)
+print("\nnon_STEM_data")
+s2_non_STEM = section_Two_Quantitative(non_STEM_data)
+print("\n\n")
+print("Section three:")
+print("\nSTEM_data")
+s3_STEM = section_Three_Quantitative(STEM_data)
+print("\nnon_STEM_data")
+s3_non_STEM = section_Three_Quantitative(non_STEM_data)
+
 
 '''Categorisation by year
 
@@ -224,10 +224,10 @@ s3_y4=section_Three_Quantitative(y4_data)
 '''
 
 '''Categorise by section 1 qn 1'''
-s1q1A = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly agree","Agree"])]
-s1q1A_s1 = section_One_Quantitative(s1q1A)
-s1q1D = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly disagree","Disagree"])]
-s1q1D_s1 = section_One_Quantitative(s1q1D)
+# s1q1A = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly agree","Agree"])]
+# s1q1A_s1 = section_One_Quantitative(s1q1A)
+# s1q1D = df.loc[df["1.\xa0\xa0\xa0\xa0\xa0I keep track of my own learning data (e.g. tracking hours spent on a module per week, strengths and weakness in terms of course topics).2"].isin(["Strongly disagree","Disagree"])]
+# s1q1D_s1 = section_One_Quantitative(s1q1D)
 '''Hypo 1 does stem/ non-STEM produce differnet answers for some questions'''
 # print("\nSection 1")
 # for i in s1_STEM:
@@ -263,28 +263,29 @@ def create_df(datalist,sectionname,sizes):
     return combined_df
 
 
-# combined_df = create_df([s3_STEM,s3_non_STEM],["STEM_S3","non_STEM_S3"],[112,54])
+combined_df = create_df([s1_STEM,s1_non_STEM],["STEM_S1","non_STEM_S1"],[112,56])
 # combined_df = create_df([s3_y1,s3_y2,s3_y3,s3_y4],["y1_S3","y2_S3","y3_S3","y4_S3"],[65,53,21,27])
 # dropped = [i for i in range(16,28,1)]
 # combined_df = combined_df.drop(dropped)
 # combined_df = create_df([s3],["S3"],[166])
-combined_df = create_df([s1q1D_s1],["S1"],[77]) #77 29 62 / 127 26 15 / 118 31 19
+# combined_df = create_df([s1q1D_s1],["S1"],[62]) #77 29 62 / 127 26 15 / 118 31 19
 print(combined_df)
 plot1 = combined_df.plot( 
     x = 'question', 
     kind = 'barh', 
     stacked = True, 
-    title = 'Section 1 with categorisation by s1q1', 
+    title = 'Section 1 with categorisation of STEM / non-STEM', 
     mark_right = True)
 plt.legend (loc='upper left')
 # df_total = combined_df
-# df_rel = df[df.columns[1:]].div(df_total, 0)*100
-# for n in df_rel: 
-#     for i, (cs, ab, pc) in enumerate(zip(df.iloc[:, 1:].cumsum(1)[n],  
-#                                          df[n], df_rel[n])): 
-# plt.text(cs - ab / 2, i, str(np.round(pc, 1)) + '%',  
-#                  va = 'center', ha = 'center')
-# plt.text(1-combined_df["Agree"][1]/100, 0.5, str(combined_df["Agree"][0]) + '%',  va = 'center', ha = 'center')
+# df_rel = combined_df[combined_df.columns[1:]].div(df_total, 0)*100
+# print(df_rel)
+new_df= combined_df
+new_df = new_df.drop("question",axis=1)
+for n in new_df: 
+    for i, (cs, ab, pc) in enumerate(zip(combined_df.iloc[:, 1:].cumsum(1)[n], combined_df[n], new_df[n])):
+        
+        plt.text(cs - ab / 2, i, str(np.round(pc*100, 1)) + '%',  va = 'center', ha = 'center')
 plt.show()
 
 # print([s1_STEM["q2"][0], s1_STEM["q2"][1], s1_STEM["q2"][2], s1_STEM["q2"][0]/112, s1_STEM["q2"][2]/112])
